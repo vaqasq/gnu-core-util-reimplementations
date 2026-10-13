@@ -19,10 +19,6 @@ int main(int argc, char *argv[]){
 
     // Other
 
-    // Fix this so it works generally. Then, add another bool to track the
-    // phenomenon where echo -n -n -n doesnt do anything but echo -n hello -n
-    // world will print the second -n
-
     bool addNewline = true;
     bool nFlagAcceptable = true;
 
