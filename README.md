@@ -8,3 +8,6 @@ Hello, World!Hello
 ```
 
 Therefore, my understanding is that your shell's implementation argument parsing can change how echo will work.
+
+#### Cat
+Reimplements basic functionality of cat, specifically concatenating files and or taking input from standard input.
