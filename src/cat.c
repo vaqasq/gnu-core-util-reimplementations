@@ -1,5 +1,7 @@
 #include <stdio.h>
+#include <fcntl.h>
 #include <stdbool.h>
+#include <sys/fcntl.h>
 #include <unistd.h>
 #include <errno.h>
 #include <string.h>
@@ -32,20 +34,46 @@ int main(int argc, char *argv[]){
             fdArr[entries_fdArr] = STDIN_FILENO;
             entries_fdArr++;
             dashPresent = true; 
+            continue;
         }
 
         // just open files now/check/add to arr
+        int fd = open(argv[i], O_RDONLY);
+
+        if (fd == -1){
+            fprintf(stderr, "Failed to open file '%s': %s\n", argv[i], strerror(errno));
+            return 1;
+        }
+
+        fdArr[entries_fdArr] = fd;
+        entries_fdArr++;
         
     }
 
 
     // cat files
 
+    int rc;
+
     for (int i = 0; i < entries_fdArr; ++i){
+
+       rc = meow(fdArr[i]);
+       if (rc == 1){
+           fprintf(stderr, "Error in catting a fileA");
+           return 1;
+       }
 
     }
 
     free(fdArr);
+    
+    // close opened files other than stdin
+    
+    for (int i = 0; i < entries_fdArr; ++i){
+        if (fdArr[i] != STDIN_FILENO){
+            close(fdArr[i]);
+        }
+    }
 
     return 0;
 }
