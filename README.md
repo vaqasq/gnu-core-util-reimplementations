@@ -17,3 +17,6 @@ $ echo "Hello World" | ./cat - file.txt
 Hello World
 ... [file.txt contents]
 ```
+
+#### pwd
+Prints working directory, with "pwd" and "pwd -L" being equivalent, printing the logical path, while "pwd -P" resolves symlinks.
